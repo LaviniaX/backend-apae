@@ -23,23 +23,20 @@ class Usuario(db.Model):
     def __repr__(self):
         return f"<Usuario {self.nome} {self.sobrenome} ({self.tipo.value})>"
 
+# CÓDIGO CORRIGIDO E SEM DUPLICAÇÃO
 class Paciente(db.Model):
     __tablename__ = 'paciente'
-    # Relacionamento Um para Um com Prontuario
-    id_prontuario = db.Column(db.Integer, db.ForeignKey('prontuario.id_prontuario'), unique=True)
-    prontuario = db.relationship('Prontuario', backref='paciente', uselist=False, cascade="all, delete-orphan", single_parent=True)
 
     id_paciente = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     nome_social = db.Column(db.String(100))
     cpf = db.Column(db.String(14), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True) # Email pode ser opcional para paciente
-    senha = db.Column(db.String(128)) # Senha pode ser opcional se o paciente não fizer login
+    email = db.Column(db.String(120), unique=True)
+    senha = db.Column(db.String(128))
 
-    # Relacionamento Um para Um com Prontuario
+    # Relacionamento Um para Um com Prontuario (DEFINIÇÃO ÚNICA E CORRETA)
     id_prontuario = db.Column(db.Integer, db.ForeignKey('prontuario.id_prontuario'), unique=True)
-    prontuario = db.relationship('Prontuario', backref='paciente', uselist=False, cascade="all, delete-orphan")
-
+    prontuario = db.relationship('Prontuario', backref='paciente', uselist=False, cascade="all, delete-orphan", single_parent=True)
 
     def __repr__(self):
         return f"<Paciente {self.nome} ({self.cpf})>"
