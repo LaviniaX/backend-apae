@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for
 from services.patient_service import PatientService
 from services.medical_record_service import MedicalRecordService # Pode ser útil para criar um prontuário ao criar paciente
-
+from datetime import datetime, date
 patient_bp = Blueprint('patient_bp', __name__)
 
 @patient_bp.route('/patients', methods=['GET'])

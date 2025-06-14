@@ -12,6 +12,7 @@ class TipoUsuario(enum.Enum):
 class Usuario(db.Model):
     __tablename__ = 'usuario'
 
+
     id_usuario = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     sobrenome = db.Column(db.String(100), nullable=False)
@@ -24,6 +25,9 @@ class Usuario(db.Model):
 
 class Paciente(db.Model):
     __tablename__ = 'paciente'
+    # Relacionamento Um para Um com Prontuario
+    id_prontuario = db.Column(db.Integer, db.ForeignKey('prontuario.id_prontuario'), unique=True)
+    prontuario = db.relationship('Prontuario', backref='paciente', uselist=False, cascade="all, delete-orphan", single_parent=True)
 
     id_paciente = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
