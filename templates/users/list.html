@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuários</title>
+</head>
+<body>
+    <h1>Usuários do Sistema</h1>
+    <p><a href="{{ url_for('user_bp.create_user') }}">Criar Novo Usuário</a></p>
+
+    {% if users %}
+        <ul>
+            {% for user in users %}
+                <li>
+                    <a href="{{ url_for('user_bp.get_user', user_id=user.id_usuario) }}">
+                        {{ user.nome }} {{ user.sobrenome }} ({{ user.email }}) - {{ user.tipo.value }}
+                    </a>
+                    <a href="{{ url_for('user_bp.edit_user', user_id=user.id_usuario) }}">Editar</a>
+                    <form action="{{ url_for('user_bp.delete_user', user_id=user.id_usuario) }}" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este usuário?');">Deletar</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum usuário cadastrado.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('index') }}">Voltar para o Dashboard</a></p>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Bem-vindo ao Dashboard!</h1>
+    <p>Navegue pelas seções:</p>
+    <ul>
+        <li><a href="{{ url_for('user_bp.list_users') }}">Gerenciar Usuários</a></li>
+        <li><a href="{{ url_for('patient_bp.list_patients') }}">Gerenciar Pacientes</a></li>
+        <li><a href="{{ url_for('medical_record_bp.list_medical_records') }}">Gerenciar Prontuários</a></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<label for="nome">Nome:</label>
+<input type="text" id="nome" name="nome" value="{{ patient.nome }}" required>
+
+<label for="possui_alergia">
+    <input type="checkbox" id="possui_alergia" name="possui_alergia" {% if patient.prontuario and patient.prontuario.possui_alergia %}checked{% endif %}> Possui Alergia?
+</label>
+
+<label for="sexo">Sexo:</label>
+<select id="sexo" name="sexo">
+    <option value="">Selecione</option>
+    <option value="Masculino" {% if patient.prontuario and patient.prontuario.sexo == 'Masculino' %}selected{% endif %}>Masculino</option>
+    <option value="Feminino" {% if patient.prontuario and patient.prontuario.sexo == 'Feminino' %}selected{% endif %}>Feminino</option>
+    <option value="Outro" {% if patient.prontuario and patient.prontuario.sexo == 'Outro' %}selected{% endif %}>Outro</option>
+</select>
+
+<label for="data_nascimento">Data de Nascimento:</label>
+<input type="date" id="data_nascimento" name="data_nascimento" value="{{ patient.prontuario.data_nascimento.strftime('%Y-%m-%d') if patient.prontuario and patient.prontuario.data_nascimento else '' }}">

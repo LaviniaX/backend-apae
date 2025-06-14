@@ -1,0 +1,14 @@
+<p><strong>Nome Completo:</strong> {{ patient.nome }} {{ patient.nome_social }}</p>
+<p><strong>CPF:</strong> {{ patient.cpf }}</p>
+
+<h2>Dados do Prontuário</h2>
+{% if patient.prontuario %}
+    <p><strong>Número do Prontuário:</strong> {{ patient.prontuario.numero_prontuario }}</p>
+    <p><strong>Endereço:</strong> {{ patient.prontuario.endereco_logradouro }}, {{ patient.prontuario.endereco_numero }}</p>
+    <p><strong>Possui Alergia:</strong> {{ 'Sim' if patient.prontuario.possui_alergia else 'Não' }}</p>
+    {% if patient.prontuario.possui_alergia %}
+        <p><strong>Descrição Alergias:</strong> {{ patient.prontuario.alergias_descricao }}</p>
+    {% endif %}
+    {% else %}
+    <p>Prontuário não encontrado para este paciente.</p>
+{% endif %}
